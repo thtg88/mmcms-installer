@@ -24,7 +24,7 @@
         "phpunit/phpunit": "^8.0"
     },
     "bin": [
-        "bin/laravel"
+        "bin/mmcms"
     ],
     "autoload": {
         "psr-4": {

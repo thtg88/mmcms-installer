@@ -9,40 +9,8 @@
 
 ## Installation
 
-``` bash
-# clone the repo
-$ git clone https://github.com/thtg88/mmcms.git mmcms
-
-# create a new Laravel application
-$ laravel new mmcms-api
-```
-
-Add mmcms as a dependency of your API project
-``` json
-{
-    ...
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../mmcms"
-        }
-    ],
-    "require": {
-        ...
-        "thtg88/mmcms": "*"
-    },
-    ...
-}
-```
-
-Next from your terminal
-``` bash
-# Run composer update to bring in mmCMS as dependancy
-composer update
-
-# And install mmCMS
-php artisan mmcms:install
-
+```bash
+composer global require thtg88/mmcms-installer
 ```
 
 ## Usage

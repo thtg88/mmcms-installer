@@ -1,0 +1,53 @@
+{
+    "name": "thtg88/mmcms-installer",
+    "description": "mmCMS application installer.",
+    "keywords": ["cms", "laravel", "mmcms"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marco Marassi",
+            "email": "admin@marco-marassi.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4.6",
+        "ext-zip": "*",
+        "guzzlehttp/guzzle": "^6.0",
+        "symfony/console": "^5.0",
+        "symfony/filesystem": "^5.0",
+        "symfony/finder": "^5.0",
+        "symfony/process": "^5.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpstan/phpstan": "^0.12.25",
+        "phpunit/phpunit": "^8.0"
+    },
+    "bin": [
+        "bin/laravel"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Thtg88\\MmCmsInstaller\\Console\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Thtg88\\MmCmsInstaller\\Console\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "check-style": "vendor/bin/php-cs-fixer fix --using-cache=no --diff --dry-run",
+        "fix-style": "vendor/bin/php-cs-fixer fix --using-cache=no",
+        "stan": [
+            "vendor/bin/phpstan analyse src",
+            "vendor/bin/phpstan analyse tests"
+        ],
+        "test": "vendor/bin/phpunit"
+    }
+}

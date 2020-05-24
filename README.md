@@ -27,7 +27,7 @@ composer install
 
 ## Tests
 
-You can run the tests using:
+You can run the whole tests suite using:
 
 ```bash
 composer run-script test

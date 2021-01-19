@@ -2,11 +2,11 @@
 
 namespace Thtg88\MmCmsInstaller\Console\Tests;
 
-use Thtg88\MmCmsInstaller\Console\NewCommand;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
+use Thtg88\MmCmsInstaller\Console\NewCommand;
 
 class NewCommandTest extends TestCase
 {
@@ -33,11 +33,11 @@ class NewCommandTest extends TestCase
         // die();
 
         if (file_exists($scaffoldDirectory)) {
-            (new Filesystem)->remove($scaffoldDirectory);
+            (new Filesystem())->remove($scaffoldDirectory);
         }
 
         $app = new Application('mmCMS Installer');
-        $app->add(new NewCommand);
+        $app->add(new NewCommand());
 
         $tester = new CommandTester($app->find('new'));
 

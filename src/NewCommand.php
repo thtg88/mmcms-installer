@@ -18,7 +18,7 @@ use ZipArchive;
 class NewCommand extends Command
 {
     /**
-     * The URL of the zipball file for the Admin
+     * The URL of the zipball file for the Admin.
      *
      * @var string
      */
@@ -28,7 +28,7 @@ class NewCommand extends Command
     private $api_directory;
 
     /**
-     * The URL of the zipball file for the API
+     * The URL of the zipball file for the API.
      *
      * @var string
      */
@@ -58,8 +58,9 @@ class NewCommand extends Command
     /**
      * Execute the command.
      *
-     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
      * @return int
      */
     protected function execute(
@@ -72,7 +73,7 @@ class NewCommand extends Command
             );
         }
 
-        if (! extension_loaded('zip')) {
+        if (!extension_loaded('zip')) {
             throw new RuntimeException(
                 'The Zip PHP extension is not installed. '.
                 'Please install it and try again.'
@@ -95,7 +96,7 @@ class NewCommand extends Command
         $admin_directory = $directory.DIRECTORY_SEPARATOR.
             $name_parts[$last_name_parts_idx].'-admin';
 
-        if (! $input->getOption('force')) {
+        if (!$input->getOption('force')) {
             $this->ensureApplicationDoesntExist($directory);
         }
 
@@ -123,6 +124,7 @@ class NewCommand extends Command
      * Ensure that the application does not already exist.
      *
      * @param string $directory
+     *
      * @return void
      */
     protected function ensureApplicationDoesntExist(string $directory): void
@@ -159,6 +161,7 @@ class NewCommand extends Command
      * Download the temporary Zip to the given file for the API.
      *
      * @param string $zipFile
+     *
      * @return self
      */
     protected function downloadApi(string $zipFile): self
@@ -171,9 +174,9 @@ class NewCommand extends Command
         $response = $client->get($github_tag_url);
         $tags = json_decode((string) $response->getBody(), true);
         if (
-            ! is_array($tags) ||
+            !is_array($tags) ||
             count($tags) === 0 ||
-            ! array_key_exists('zipball_url', $tags[0])
+            !array_key_exists('zipball_url', $tags[0])
         ) {
             throw new RuntimeException(
                 'Could not retrieve mmCMS latest version. '.
@@ -194,6 +197,7 @@ class NewCommand extends Command
      * Download the temporary Zip to the given file for the Admin.
      *
      * @param string $zipFile
+     *
      * @return self
      */
     protected function downloadAdmin(string $zipFile): self
@@ -206,9 +210,9 @@ class NewCommand extends Command
         $response = $client->get($github_tag_url);
         $tags = json_decode((string) $response->getBody(), true);
         if (
-            ! is_array($tags) ||
+            !is_array($tags) ||
             count($tags) === 0 ||
-            ! array_key_exists('zipball_url', $tags[0])
+            !array_key_exists('zipball_url', $tags[0])
         ) {
             throw new RuntimeException(
                 'Could not retrieve mmCMS latest version. '.
@@ -230,11 +234,12 @@ class NewCommand extends Command
      *
      * @param string $zipFile
      * @param string $directory
+     *
      * @return self
      */
     protected function extract(string $zipFile, string $directory): self
     {
-        $archive = new ZipArchive;
+        $archive = new ZipArchive();
 
         $response = $archive->open($zipFile, ZipArchive::CHECKCONS);
 
@@ -252,7 +257,7 @@ class NewCommand extends Command
         // GitHub provides a whole folder zipped.
         // So we are going to find it and move all it's content up one level
         $found = false;
-        $filesystem = new Filesystem;
+        $filesystem = new Filesystem();
         $finder = (new Finder())->directories()->in($directory)->depth('== 0');
         foreach ($finder as $_directory) {
             $path_name = $_directory->getPathname();
@@ -282,6 +287,7 @@ class NewCommand extends Command
      * Clean-up the Zip file.
      *
      * @param string $zipFile
+     *
      * @return self
      */
     protected function cleanUp(string $zipFile): self
@@ -296,8 +302,9 @@ class NewCommand extends Command
     /**
      * Make sure the storage and bootstrap cache directories are writable.
      *
-     * @param string $app_directory
+     * @param string                                            $app_directory
      * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
      * @return self
      */
     protected function prepareWritableApiDirectories(
@@ -349,9 +356,10 @@ class NewCommand extends Command
     /**
      * Install composer dependencies and run scripts.
      *
-     * @param string $api_directory
-     * @param InputInterface $input
+     * @param string          $api_directory
+     * @param InputInterface  $input
      * @param OutputInterface $output
+     *
      * @return self
      */
     protected function installApiDependencies(

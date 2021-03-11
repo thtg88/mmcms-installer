@@ -49,10 +49,7 @@
         ],
         "check-style": "vendor/bin/php-cs-fixer fix --using-cache=no --diff --dry-run",
         "fix-style": "vendor/bin/php-cs-fixer fix --using-cache=no",
-        "stan": [
-            "vendor/bin/phpstan analyse src",
-            "vendor/bin/phpstan analyse tests"
-        ],
+        "stan": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/phpunit"
     }
 }

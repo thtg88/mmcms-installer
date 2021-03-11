@@ -2,14 +2,12 @@ name: mmCMS Installer CI
 
 on:
   push:
-  pull_request:
-  schedule:
-    - cron: '0 0 * * *'
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
     strategy:
       fail-fast: true
 
@@ -17,21 +15,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Cache dependencies
-        uses: actions/cache@v1
-        with:
-          path: ~/.composer/cache/files
-          key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.0
           extensions: dom, curl, libxml, mbstring, zip, json
           coverage: none
 
-      - name: Install dependencies
-        run: composer install --no-interaction --prefer-dist
+      - uses: "ramsey/composer-install@v1"
 
       - name: Run linting
         run: composer run-script check-style
@@ -40,4 +31,4 @@ jobs:
         run: composer run-script stan
 
       - name: Execute tests
-        run: vendor/bin/phpunit --verbose
+        run: composer run-script test -- --stop-on-failure

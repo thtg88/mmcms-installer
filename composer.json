@@ -21,7 +21,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
         "phpstan/phpstan": "^0.12.25",
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^9.2"
     },
     "bin": [
         "bin/mmcms"

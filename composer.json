@@ -42,6 +42,11 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "ci": [
+            "@check-style",
+            "@stan",
+            "@test --stop-on-failure"
+        ],
         "check-style": "vendor/bin/php-cs-fixer fix --using-cache=no --diff --dry-run",
         "fix-style": "vendor/bin/php-cs-fixer fix --using-cache=no",
         "stan": [
